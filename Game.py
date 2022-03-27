@@ -1,21 +1,20 @@
-# Create game board
+# Game start
 # Ask player to play as X or O
 # X plays first, MAX
 # O plays next, MIN
+# Create game board
+# Play until a winning condition is fulfilled or no available move (game over)
 
-# Node
-# DFS
-# MINIMAX Algorithm
+# Mini-Max Algorithm
 
 # State - game board
 # Player(s) - defines which player has the move in a state
 # Action(s) - Available moves
 # Result(s, a) - State after a move is taken
-# Terminal-Test(s) - Is it a winning condition - bool
+# Terminal-Test(s) - Is it game over - bool
 # Utility(s) - Who wins - enum(-1, 0, 1)
 
 
-# Gameplay
 from copy import deepcopy
 from math import inf
 import sys
