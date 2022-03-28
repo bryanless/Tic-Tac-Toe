@@ -29,7 +29,6 @@ class Game:
 
     # Show main menu
 	def showMenu(self):
-		choice = ''
 		while (True):
 			print('''=== Tic Tac Toe ===
 1. Play
@@ -83,10 +82,10 @@ class Game:
 						self.isPlayerTurn = False
 						break
 					else:
-						print('Invalid move')
+						print('Invalid move\n')
 			else:
 				print('Opponent is thinking...')
-				self.gameBoard.replace(self.minimax(), self.opponent)
+				self.gameBoard.replace(self.minimax(self.gameBoard), self.opponent)
 				self.isPlayerTurn = True
 			
 			self.gameBoard.show()
@@ -104,7 +103,7 @@ class Game:
 		print('Invalid input\n')
 
 	# Minimax algorithm
-	def minimax(self):
+	def minimax(self, gameBoard: Board):
 		# X is MAX
 		# O is MIN
 
@@ -114,8 +113,8 @@ class Game:
 		if (self.opponent == 'X'):
 			utilityValue = -inf
 
-			for index in self.gameBoard.getAvailableBlock():
-				currentUtilityValue = self.minValue(self.makeMove(self.gameBoard, index, self.opponent))
+			for index in gameBoard.getAvailableBlock():
+				currentUtilityValue = self.minValue(self.makeMove(gameBoard, index, self.opponent))
 
 				if (utilityValue < currentUtilityValue):
 					utilityValue = currentUtilityValue
@@ -123,8 +122,8 @@ class Game:
 		else:
 			utilityValue = +inf
 
-			for index in self.gameBoard.getAvailableBlock():
-				currentUtilityValue = self.maxValue(self.makeMove(self.gameBoard, index, self.opponent))
+			for index in gameBoard.getAvailableBlock():
+				currentUtilityValue = self.maxValue(self.makeMove(gameBoard, index, self.opponent))
 				
 				if (currentUtilityValue < utilityValue):
 					utilityValue = currentUtilityValue
@@ -206,6 +205,7 @@ class Game:
 		# Draw
 		return 0
 
+	# Get the winner if there is one
 	def gameWinner(self, gameBoard: Board):
 		for winCondition in gameBoard.winConditions:
 			# Check if 3 blocks in win condition has the same player
